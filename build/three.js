@@ -22962,7 +22962,7 @@
 		// this.setTexture2D = setTexture2D;
 		this.setTexture2D = ( function () {
 
-			var warned = true;
+			var warned = false;
 
 			// backwards compatibility: peel texture.texture
 			return function setTexture2D( texture, slot ) {
@@ -24691,20 +24691,6 @@
 		this.generateMipmaps = false;
 
 		var scope = this;
-
-		function update() {
-
-			requestAnimationFrame( update );
-
-			if ( video.readyState >= video.HAVE_CURRENT_DATA ) {
-
-				scope.needsUpdate = true;
-
-			}
-
-		}
-
-		update();
 
 	}
 
