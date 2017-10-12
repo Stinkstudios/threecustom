@@ -22335,10 +22335,50 @@
 
 			}
 
-			objects.update( mesh );
+
+			// function WebGLObjects( geometries, infoRender ) {
+
+			// 	var updateList = {};
+
+			// 	function update( object ) {
+
+			// 		var frame = infoRender.frame;
+
+			// 		var geometry = object.geometry;
+			// 		var buffergeometry = geometries.get( object, geometry );
+
+			// 		// console.log(buffergeometry)
+			// 		// Update once per frame
+
+			// 		if ( updateList[ buffergeometry.id ] !== frame ) {
+
+			// 			if ( geometry.isGeometry ) {
+
+			// 				buffergeometry.updateFromObject( object );
+
+			// 			}
+
+			// 			geometries.update( buffergeometry );
+
+			// 			updateList[ buffergeometry.id ] = frame;
+
+			// 		}
+
+			// 		return buffergeometry;
+
+			// 	}
+
+
+			geometries.update( mesh.geometry );
+			// updateList[ buffergeometry.id ] = frame;
+
+			// objects.update( buffergeometry );
+
+			// objects.update( mesh );
 
 			_this.renderBufferDirectLIGHT( camera, null, mesh.geometry, mesh.material, mesh, null );
 
+			// _this.renderBufferDirect( camera, null, mesh.geometry, mesh.material, mesh, null );
 			
 			state.buffers.depth.setTest( true );
 			state.buffers.depth.setMask( true );
@@ -22352,7 +22392,7 @@
 			var program = setProgram( camera, fog, material, object );
 			var geometryProgram = geometry.id + '_' + program.id + '_' + ( material.wireframe === true );
 
-			var updateBuffers = true;
+			var updateBuffers = false;
 
 			if ( geometryProgram !== _currentGeometryProgram ) {
 
@@ -22360,10 +22400,6 @@
 				updateBuffers = true;
 
 			}
-
-			// morph targets
-
-			var morphTargetInfluences = object.morphTargetInfluences;
 
 			//
 
@@ -22380,6 +22416,7 @@
 				attribute = attributes.get( index );
 
 				renderer = indexedBufferRenderer;
+
 				renderer.setIndex( attribute );
 
 			}
