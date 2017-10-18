@@ -11372,6 +11372,7 @@
 
 			return function rotateY( angle ) {
 
+
 				m1.makeRotationY( angle );
 
 				this.applyMatrix( m1 );
@@ -16416,6 +16417,27 @@
 				// TODO Push this to renderList
 
 				renderer.renderBufferDirect( planeCamera, null, planeMesh.geometry, planeMesh.material, planeMesh, null );
+
+			} else if ( background && background.isMesh ) {
+
+				if ( planeCamera === undefined ) {
+
+					planeCamera = new OrthographicCamera( - 1, 1, 1, - 1, 0, 1 );
+
+				}
+
+				if(background.visible){
+
+					planeMesh = background
+
+					geometries.update( planeMesh.geometry );
+
+					renderer.renderBufferDirect( planeCamera, null, planeMesh.geometry, planeMesh.material, planeMesh, null );
+
+				}
+
+				// TODO Push this to renderList
+
 
 			}
 
